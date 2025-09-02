@@ -18,9 +18,9 @@ param location string
 // "resourceGroupName": {
 //      "value": "myGroupName"
 // }
-param resourceGroupName string = ''
-param appServiceName string = ''
-param appServicePlanName string = ''
+param resourceGroupName string = 'pupAppResources'
+param appServiceName string = 'pupAppService'
+param appServicePlanName string = 'pupAppServicePlan'
 
 var abbrs = loadJsonContent('./abbreviations.json')
 

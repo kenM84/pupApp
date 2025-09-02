@@ -1,2 +1,16 @@
 Flask==3.1.0
 gunicorn
+sqlalchemy
+sqlalchemy-utils
+pyodbc
+azure-ai-documentintelligence
+azure-common
+azure-core
+azure-identity
+azure-keyvault-secrets
+azure-mgmt-core
+azure-mgmt-search
+azure-search-documents
+azure-storage-blob
+fastapi
+aiohttp
