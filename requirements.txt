@@ -1,8 +1,11 @@
 Flask==3.1.0
+Flask-Session
+Flask-Login
+Werkzeug
 gunicorn
 sqlalchemy
 sqlalchemy-utils
-pyodbc
+pymssql
 azure-ai-documentintelligence
 azure-common
 azure-core

@@ -8,14 +8,14 @@ class GenericSecretProvider(ABC):
     """
 
     @abstractmethod
-    async def configure(self) -> bool:
+    def configure(self) -> bool:
         """
         Initializes the secret provider and verifies connectivity.
         """
         pass
 
     @abstractmethod
-    async def get_secret(self, secret_name: str) -> Optional[str]:
+    def get_secret(self, secret_name: str) -> Optional[str]:
         """
         Fetches a secret by name.
         """

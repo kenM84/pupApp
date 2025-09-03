@@ -1,11 +1,14 @@
+# This is a copy of the keyvault service for Azure deployment
+# Azure App Service seems to have issues with subdirectories
+
 import logging
 import os
 from typing import Dict, Optional
 
-from azure.keyvault.secrets.aio import SecretClient
+from azure.keyvault.secrets import SecretClient
 from azure.keyvault.secrets import KeyVaultSecret
 from fastapi.security import APIKeyHeader
-from azure.identity.aio import DefaultAzureCredential
+from azure.identity import DefaultAzureCredential
 
 from .generic_secret_provider import GenericSecretProvider
 
@@ -28,13 +31,17 @@ class KeyVaultService(GenericSecretProvider):
             self.logger.warning("KeyVaultName environment variable not set.")
         self.keyVaultUrl = f"https://{vault_name}.vault.azure.net/"
 
-    async def configure(self) -> bool:
+    def configure(self) -> bool:
         """
         Initializes the SecretClient and verifies connectivity.
         """
-        client = None
         try:
+            # Test connectivity by creating a client and attempting to list
+            # secrets
             client = SecretClient(self.keyVaultUrl, self.envCred)
+            # Try to list secrets to verify connectivity
+            # (this will fail if no permissions, but that's ok)
+            list(client.list_properties_of_secrets(max_page_size=1))
             self.logger.debug(
                 f"KeyVaultService initialized with URL: {self.keyVaultUrl}")
             return True
@@ -42,15 +49,11 @@ class KeyVaultService(GenericSecretProvider):
             self.logger.error("Failed to configure KeyVaultService.",
                               exc_info=True)
             return False
-        finally:
-            if client:
-                await client.close()
 
-    async def get_secret(self, secret_name: str) -> Optional[str]:
+    def get_secret(self, secret_name: str) -> Optional[str]:
         """
         Fetches a secret from environment variables or Azure Key Vault.
         """
-        client = None
         try:
             # Check if secret is available in environment
             if os.environ.get(secret_name):
@@ -61,15 +64,12 @@ class KeyVaultService(GenericSecretProvider):
                 return os.environ.get(underscore_secret)
 
             client = SecretClient(self.keyVaultUrl, self.envCred)
-            secret = await client.get_secret(secret_name)
+            secret = client.get_secret(secret_name)
             return self.split_secret_if_array(secret)
         except Exception:
             self.logger.error(f"Error retrieving secret '{secret_name}'.",
                               exc_info=True)
             return None
-        finally:
-            if client:
-                await client.close()
 
     def split_secret_if_array(self, secret: Optional[KeyVaultSecret]) -> \
             Optional[str]:
