@@ -1,0 +1,18 @@
+<!-- About-->
+<section class="about-section text-center" id="about">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="text-white mb-4">{% block about_title %}Come use my cumdump pup{% endblock %}</h2>
+                <p class="text-white-50">
+                    {% block about_content %}
+                    Hi! My name is MaineDaddy and I built this app to help get my Rush Pup as loaded as possible.  He's a publicly trained service pup who will take any bone that I tell him to.  Come get in his holes.
+                    {% endblock %}
+                </p>
+            </div>
+        </div>
+        {% block about_image %}
+        <img class="img-fluid" src="{{ url_for('static', filename='greyscale_template/assets/img/PupInClothes_Grey.jpg') }}" alt="..." />
+        {% endblock %}
+    </div>
+</section>
