@@ -12,6 +12,7 @@ build/
 develop-eggs/
 dist/
 downloads/
+flask_session/
 eggs/
 .eggs/
 lib/

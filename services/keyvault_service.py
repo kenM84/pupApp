@@ -10,7 +10,7 @@ from azure.keyvault.secrets import KeyVaultSecret
 from fastapi.security import APIKeyHeader
 from azure.identity import DefaultAzureCredential
 
-from .generic_secret_provider import GenericSecretProvider
+from pupApp.services.generic_secret_provider import GenericSecretProvider
 
 
 class KeyVaultService(GenericSecretProvider):

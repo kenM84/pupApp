@@ -4,7 +4,7 @@ from flask import (Flask, redirect, render_template, request,
 from flask_session import Session
 from flask_login import (LoginManager, login_required, login_user,
                          logout_user)
-from .services.auth_service import AuthService
+from pupApp.services.auth_service import AuthService
 
 
 

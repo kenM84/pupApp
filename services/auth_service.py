@@ -1,8 +1,8 @@
 from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from ..models.user import User, Base
-from .keyvault_service import KeyVaultService
+from pupApp.models.user import User, Base
+from pupApp.services.keyvault_service import KeyVaultService
 
 
 class AuthService:
