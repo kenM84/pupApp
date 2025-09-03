@@ -4,9 +4,7 @@ from flask import (Flask, redirect, render_template, request,
 from flask_session import Session
 from flask_login import (LoginManager, login_required, login_user,
                          logout_user)
-from pupApp.services.auth_service import AuthService
-
-
+from services.auth_service import AuthService
 
 
 app = Flask(__name__)
@@ -30,8 +28,10 @@ login_manager.login_view = 'login'
 login_manager.login_message = 'Please log in to access this page.'
 login_manager.login_message_category = 'info'
 
+
 # Initialize auth service
 auth_service = AuthService()
+
 
 @login_manager.user_loader
 def load_user(user_id):
