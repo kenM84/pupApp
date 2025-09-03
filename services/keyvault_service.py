@@ -26,7 +26,8 @@ class KeyVaultService(GenericSecretProvider):
         self.iterable_creds: Dict[str, int] = {}
         self.api_key_header = APIKeyHeader(name="x-api-key", auto_error=False)
 
-        vault_name = os.environ.get("KeyVaultName")
+        #vault_name = os.environ.get("KeyVaultName")
+        vault_name = 'pupVault1234'
         if not vault_name:
             self.logger.warning("KeyVaultName environment variable not set.")
         self.keyVaultUrl = f"https://{vault_name}.vault.azure.net/"
